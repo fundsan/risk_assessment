@@ -5,6 +5,7 @@ practicemodels/**
 production_deployment/**   
 sourcedata/**   
 testdata/** 
+ingestion/**
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
