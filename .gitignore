@@ -1,3 +1,11 @@
+## data files
+model/**  
+practicedata/**   
+practicemodels/**   
+production_deployment/**   
+sourcedata/**   
+testdata/** 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
