@@ -25,8 +25,15 @@ def merge_multiple_dataframe():
         df1 = pd.read_csv(os.getcwd()+input_folder_path+each_filename)
         df_list=df_list.append(df1)
 
+    
     result=df_list.drop_duplicates()
     result.to_csv(os.getcwd()+output_folder_path+'finaldata.csv', index=False)
-    
+    dateTimeObj=datetime.now()
+    thetimenow=str(dateTimeObj.year)+ '/'+str(dateTimeObj.month)+ '/'+str(dateTimeObj.day)
+    filename='ingestedfiles.txt'
+    f=open(os.getcwd()+output_folder_path+filename,'w')
+    record=output_folder_path+' '+filename+' '+str(len(result.index))+' '+str(thetimenow)+'\n'
+    f.write(record)
+    f.close()
 if __name__ == '__main__':
     merge_multiple_dataframe()
