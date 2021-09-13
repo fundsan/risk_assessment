@@ -1,7 +1,8 @@
-import requests
+from flask import request
 import json
+import os
 #Specify a URL that resolves to your workspace
-URL = "http://0.0.0.0:8000/"
+URL = "0.0.0.0:8000/"
 with open('config.json','r') as f:
     config = json.load(f) 
 
@@ -10,10 +11,10 @@ test_data_path = os.path.join(config['test_data_path'])
 
 
 #Call each API endpoint and store the responses
-response1 = requests.post(URL+'prediction?file={}'.format(os.getcwd()+'/'+test_data_path+'/'+'testdata.csv'))
-response2 = requests.get(URL+'scoring')
-response3 = requests.get(URL+'summarystats')
-response4 = requests.get(URL+'diagnostics')
+response1 = request.post(URL+'prediction?file={}'.format('testdata.csv'))
+response2 = request.get(URL+'scoring')
+response3 = request.get(URL+'summarystats')
+response4 = request.get(URL+'diagnostics')
 
 #combine all API responses
 responses = [response1,response2,response3,response4]

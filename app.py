@@ -22,6 +22,8 @@ with open('config.json','r') as f:
 
 dataset_csv_path = os.path.join(config['output_folder_path']) 
 
+test_data_path = os.path.join(config['test_data_path']) 
+prod_deployment_path = os.path.join(config['prod_deployment_path']) 
 prediction_model = None
 
 
@@ -29,8 +31,8 @@ prediction_model = None
 @app.route("/prediction", methods=['POST','OPTIONS'])
 def predict():        
     #call the prediction function you created in Step 3
-    file=request.args.get('file')
-    return {'predictions': diagnosis.model_predictions().tolist()}
+    file=os.getcwd()+'/'+test_data_path+'/'+request.args.get('file')
+    return {'predictions': diagnostics.model_predictions().tolist()}
 
 #######################Scoring Endpoint
 @app.route("/scoring", methods=['GET','OPTIONS'])
