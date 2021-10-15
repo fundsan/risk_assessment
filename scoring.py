@@ -36,7 +36,6 @@ def score_model():
 
     f1score=metrics.f1_score(predicted,y)
     with open(os.getcwd()+'/'+test_data_path+'/'+'latestscore.txt', 'w') as f:
-       print(f1score)
        f.write(str(f1score))
     return f1score
 if __name__ == '__main__':
