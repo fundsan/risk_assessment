@@ -1,13 +1,27 @@
 
-
+import json
+import os
 import training
 import scoring
 import deployment
 import diagnostics
 import reporting
+import pandas as pd
+with open('config.json','r') as f:
+    config = json.load(f) 
 
+dataset_csv_path = os.path.join(config['input_folder_path']) 
+output_model_path = os.path.join(config['output_model_path']) 
+test_data_path = os.path.join(config['test_data_path']) 
 ##################Check and read new data
 #first, read ingestedfiles.txt
+ingestedfile_df = pd.read_csv(os.getcwd()+'/'+dataset_csv_path+'/'+'ingestedfiles.txt',sep=' ',header=None, names=['dir','filename','rows','timestamp'])
+filenames = os.listdir(os.getcwd()+'/'+dataset_csv_path)
+new_data = False
+for file in filenames:
+    if file not in ingestedfile_df['filename']:
+        new_data = True
+        
 
 #second, determine whether the source data folder has files that aren't listed in ingestedfiles.txt
 
