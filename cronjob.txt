@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 */10 * * * * python fullprocess.pygi
+=======
+10 * * * * python /home/workspace/fullprocess.py
+>>>>>>> fae5e13e34318e0d2f2fe744fee94b16dd5f7dfe
