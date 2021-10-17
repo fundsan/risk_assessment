@@ -25,11 +25,13 @@ for file in filenames:
     if file not in ingestedfile_df['filename'].tolist():
         new_data = True
 
-print(new_data)
+if new_data ==False:
+    print("no need to update")
+    quit()
 #second, determine whether the source data folder has files that aren't listed in ingestedfiles.txt
 
-if new_data:
-    ingestion.merge_multiple_dataframe()
+
+ingestion.merge_multiple_dataframe()
 
 ##################Deciding whether to proceed, part 1
 #if you found new data, you should proceed. otherwise, do end the process here
@@ -45,9 +47,11 @@ new_score = scoring.score_model()
 
 ##################Deciding whether to proceed, part 2
 #if you found model drift, you should proceed. otherwise, do end the process here
-if new_score < old_score:
-    subprocess.call(["python","./training.py"])
-    subprocess.call(["python","./deployment.py"])
+if new_score >= old_score:
+    print("no data drift detected")
+    quit()
+subprocess.call(["python","./training.py"])
+subprocess.call(["python","./deployment.py"])
 
 
 ##################Re-deployment
@@ -55,8 +59,8 @@ if new_score < old_score:
 
 ##################Diagnostics and reporting
 #run diagnostics.py and reporting.py for the re-deployed model
-    subprocess.call(["python","./diagnostics.py"])
-    subprocess.call(["python","./reporting.py"])
+ subprocess.call(["python","./diagnostics.py"])
+ subprocess.call(["python","./reporting.py"])
 
 
 

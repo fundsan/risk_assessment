@@ -23,8 +23,14 @@ def score_model():
     #this function should take a trained model, load test data, and calculate an F1 score for the model relative to the test data
     #it should write the result to the latestscore.txt file
     deployedname='trainedmodel.pkl'
-    with open(os.getcwd()+'/'+output_model_path+'/'+deployedname, 'rb') as file:
-        model = pickle.load(file)
+    model=None
+    try:
+       with open(os.getcwd()+'/'+output_model_path+'/'+deployedname, 'rb') as file:
+           model = pickle.load(file)
+    except (FileNotFoundError, IOError):
+        print("Model not found so rerunning training model and deployment")
+        raise FileNotFoundError
+        
     
     testdata=pd.read_csv(os.getcwd()+'/'+test_data_path+'/'+'testdata.csv')
 
